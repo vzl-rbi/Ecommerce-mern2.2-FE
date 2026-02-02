@@ -32,6 +32,7 @@ const authSlice = createSlice({
 })
 
 export const {setUser, setStatus} = authSlice.actions
+export default authSlice.reducer
 
 /* 
 const initialState: AuthState = {

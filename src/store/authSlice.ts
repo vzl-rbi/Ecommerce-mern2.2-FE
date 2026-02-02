@@ -1,4 +1,7 @@
 import { createSlice, type PayloadAction} from "@reduxjs/toolkit";
+// 1. Define your status options (Union Type is cleaner than Enum)
+type AuthStatus = "idle" | "loading" | "success" | "fail";
+
 interface User {
   username: string;
   email: string;
@@ -6,22 +9,29 @@ interface User {
   token: string
 }
 interface AuthState {
-  user: User | null  // Use null to explicitly show "no user"
+  user: User | null,// Use null to explicitly show "no user"
+  status: AuthStatus, //api call garda success or fail yesbat dekhaune
 }
 const initialState: AuthState = {
-  user: null
+  user: null,
+  status: "idle"//Better to start with 'idle' before the API is called
 }
 
-createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     // state type is inferred automatically from initialState so //state: AuthState garnu pardain
-    setUser(state, action:PayloadAction<User>) {
+    setUser(state, action:PayloadAction<User | null>) {
       state.user = action.payload
+    },
+    setStatus(state, action:PayloadAction<AuthStatus>) {
+      state.status = action.payload
     }
   }
 })
+
+export const {setUser, setStatus} = authSlice.actions
 
 /* 
 const initialState: AuthState = {
@@ -32,3 +42,4 @@ const initialState: AuthState = {
 
 Avoiding "The Billion Dollar Mistake": Your original code uses {} as User. This tells TypeScript to "trust you" that the object has a username, email, etc., even though it’s actually empty. If you later try to access user.token.length on that empty object, your app will crash with a Runtime Error because the token is actually undefined.
 */
+

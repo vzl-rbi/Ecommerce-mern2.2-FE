@@ -58,4 +58,4 @@ Install Redux Toolkit and React-Redux
 Create a folder named src/app/store
 --- store is made from slices---
 `src/app/store/authSlice.ts`
-reducers means function or methods
+reducers means function or methods // Also helping hand

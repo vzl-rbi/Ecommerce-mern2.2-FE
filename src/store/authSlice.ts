@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction} from "@reduxjs/toolkit";
-// 1. Define your status options (Union Type is cleaner than Enum)
+// Union Type is cleaner than Enum
 type AuthStatus = "idle" | "loading" | "success" | "fail";
 
 interface User {

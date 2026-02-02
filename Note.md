@@ -59,3 +59,30 @@ Create a folder named src/app/store
 --- store is made from slices---
 `src/app/store/authSlice.ts`
 reducers means function or methods // Also helping hand
+
+### Connecting React to Redux toolkit, Provider
+
+# Routing
+
+To use routing in project, need or import BrowserRoute, Routes, and Route. First installed
+`npm install react-router-dom`
+<BrowserRouter>
+<Routes>
+<Route path="/" element={<h1>Hellow World</h1>} />
+</Routes>
+</BrowserRouter>
+
+# Provider is used from React-redux not toolkit
+
+import { Provider } from "react-redux";
+<Provider store={store}>
+<BrowserRouter>
+<Routes>
+<Route path="/" element={<h1>Home Page </h1>} />
+</Routes>
+</BrowserRouter>
+</Provider>
+
+```Aba provider bhitra ko children or route harule store ko sabai kura use garna pauxa
+``
+```

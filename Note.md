@@ -86,3 +86,15 @@ import { Provider } from "react-redux";
 ```Aba provider bhitra ko children or route harule store ko sabai kura use garna pauxa
 ``
 ```
+
+## Api call from Redux toolkit instead of components
+
+`npm install axios`
+example:
+function register(data: RegisterData) {
+return async function registerThunk(dispatch: any) {
+const response = await axios.post(`http://localhost:4000/api/register`, data)
+
+}
+
+}

@@ -1,6 +1,17 @@
 import { createSlice, type PayloadAction} from "@reduxjs/toolkit";
+import axios from "axios";
+interface RegisterData {
+  name : string;
+  email : string;
+  password: string;
+  confirm password: string
+}
+interface LoginData {
+  email: string;
+  password: string;
+}
 // Union Type is cleaner than Enum
-type AuthStatus = "idle" | "loading" | "success" | "fail";
+type AuthStatus = "idle" | "loading" | "success" | "fail" | "error";
 
 interface User {
   username: string;
@@ -43,4 +54,35 @@ const initialState: AuthState = {
 
 Avoiding "The Billion Dollar Mistake": Your original code uses {} as User. This tells TypeScript to "trust you" that the object has a username, email, etc., even though it’s actually empty. If you later try to access user.token.length on that empty object, your app will crash with a Runtime Error because the token is actually undefined.
 */
+function register(data: RegisterData) {
+  return async function registerThunk(dispatch: any) {
+    dispatch(setStatus("loading"))
+    try {
+      const response = await axios.post(`http://localhost:4000/api/register`, data)
+    if(response.status === 201) {
+      dispatch(setStatus("success"))
+    } else {
+      dispatch(setStatus("fail"))
+      
+    }      
+    } catch (err) {
+      dispatch(setStatus("error"))
+    }
+  }
+}
+function login(data: LoginData) {
+  return async function loginThunk(dispatch: any) {
+    dispatch(setStatus("loading"))
+    try {
+      const res = await axios.post('http://localhost:4000/api/login', data)      
+      if(res.status === 200) {
+        dispatch(setStatus("success"))
+      } else {
+        dispatch(setStatus("fail"))
+      }      
+    } catch (err) {
+      dispatch(setStatus("error"))      
+    }
+  }
+}
 

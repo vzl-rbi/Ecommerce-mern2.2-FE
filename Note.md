@@ -98,3 +98,24 @@ const response = await axios.post(`http://localhost:4000/api/register`, data)
 }
 
 }
+
+## Axios ko lagi http/index.ts
+
+instance banaye aba code repitive lekhna parena
+import axios from "axios";
+const API = axios.create({
+baseURL: 'http://localhost:4000/api/',
+headers: {
+'Content-Type': 'application/json',
+'Accept': 'application/json'
+}
+})
+export default API
+
+# now authSlice code will be like this
+
+function register(data: RegisterData) {
+return async function registerThunk(dispatch: any) {
+const response = await API.post(`register`, data)
+}
+}

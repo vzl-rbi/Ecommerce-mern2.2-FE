@@ -4,7 +4,6 @@ interface RegisterData {
   name : string;
   email : string;
   password: string;
-  confirm password: string
 }
 interface LoginData {
   email: string;

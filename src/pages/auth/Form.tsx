@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link } from "react-router-dom";
-interface Props {
-  type: string;
-}
-const Form: React.FC<Props> = ({ type }) => {
+import type { Props, UserDataType } from "./types";
+const Form: React.FC<Props> = ({ type, onSubmit }) => {
+  const [userData, setUserData] = useState<UserDataType>({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
+  };
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit(userData);
+  };
   return (
     <>
       <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
@@ -22,16 +37,18 @@ const Form: React.FC<Props> = ({ type }) => {
 
           {/* Form Card */}
           <div className="bg-gray-900/80 backdrop-blur-md border border-gray-800 rounded-2xl shadow-2xl p-8">
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {type === "register" && (
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Full Name
+                    UserName
                   </label>
                   <input
                     type="text"
+                    name="username"
+                    onChange={handleChange}
                     className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-amber-400 transition"
-                    placeholder="Sect Leader Chen"
+                    placeholder="sectLeaderChen"
                     required
                   />
                 </div>
@@ -42,6 +59,8 @@ const Form: React.FC<Props> = ({ type }) => {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  onChange={handleChange}
                   className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-amber-400 transition"
                   placeholder="your@email.com"
                   required
@@ -54,6 +73,8 @@ const Form: React.FC<Props> = ({ type }) => {
                 </label>
                 <input
                   type="password"
+                  name="password"
+                  onChange={handleChange}
                   className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-amber-400 transition"
                   placeholder="••••••••"
                   required
@@ -66,6 +87,8 @@ const Form: React.FC<Props> = ({ type }) => {
                   </label>
                   <input
                     type="password"
+                    name="confirmPassword"
+                    onChange={handleChange}
                     className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-amber-400 transition"
                     placeholder="••••••••"
                     required

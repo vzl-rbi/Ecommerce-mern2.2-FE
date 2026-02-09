@@ -1,8 +1,11 @@
-import React from "react";
 import Form from "../Form";
+import type { UserDataType } from "../types";
 
-const Login: React.FC = () => {
-  return <Form type="login" />;
+const Login = () => {
+  const handleLogin = (data: UserDataType) => {
+    console.log(data);
+  };
+  return <Form type="login" onSubmit={handleLogin} />;
 };
 
 export default Login;

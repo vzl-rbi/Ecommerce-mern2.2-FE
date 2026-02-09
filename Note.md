@@ -304,3 +304,10 @@ const response = await API.post(`register`, data)
 
   </div>
 </div>;
+
+## types to remember all the time
+
+const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
+
+}
+const handleSubmit = (e:FormEvent<HTMLInputElement>) => {}

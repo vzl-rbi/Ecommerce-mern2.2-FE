@@ -1,11 +1,11 @@
 import Form from "../Form";
+import type { UserDataType } from "../types";
 
 const Register = () => {
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-  return <Form type="register" />;
+  const handleRegister = (data: UserDataType) => {
+    console.log(data);
+  };
+  return <Form type="register" onSubmit={handleRegister} />;
 };
 
 export default Register;

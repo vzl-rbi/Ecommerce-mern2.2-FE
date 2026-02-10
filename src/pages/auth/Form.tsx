@@ -27,9 +27,11 @@ const Form: React.FC<Props> = ({ type, onSubmit }) => {
         <div className="relative z-10 w-full max-w-md">
           {/* Logo & Title */}
           <div className="text-center mb-10">
-            <h1 className="text-5xl font-extrabold bg-gradient-to-r from-amber-400 via-red-600 to-indigo-700 bg-clip-text text-transparent">
-              Murim
-            </h1>
+            <Link to="/">
+              <h1 className="text-5xl font-extrabold bg-gradient-to-r from-amber-400 via-red-600 to-indigo-700 bg-clip-text text-transparent cursor-pointer">
+                Murim
+              </h1>
+            </Link>
             <p className="mt-3 text-gray-400 text-lg">
               {type === "register" ? "Join The Realm" : "Welcome back, warrior"}
             </p>
@@ -128,7 +130,7 @@ const Form: React.FC<Props> = ({ type, onSubmit }) => {
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="text-amber-400 hover:underline font-semibold"
+                className="text-amber-400 hover:underline font-semibold cursor-pointer"
               >
                 Sign in
               </Link>

@@ -321,3 +321,81 @@ const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
 
 }
 const handleSubmit = (e:FormEvent<HTMLInputElement>) => {}
+
+## token stored in local store to know user is logged in completed
+
+## Making Navbar Dynamic
+
+useEffect(() => {
+const token = localStorage.getItem("token");
+setIsLoggedIn(!!token || !!user?.token);
+}, [user?.token]);
+
+### 1️⃣ `localStorage.getItem("token")`
+
+This gives:
+
+- `"abc123..."` → if token exists ✅
+- `null` → if token does NOT exist ❌
+
+---
+
+### 2️⃣ What is `!!` ?
+
+`!!` means **convert any value to true/false (boolean)**.
+
+Example:
+
+| Value       | !!Value |
+| ----------- | ------- |
+| `"abc"`     | true    |
+| `""`        | false   |
+| `null`      | false   |
+| `undefined` | false   |
+
+Means:
+
+👉 “Does token exist?”
+
+- Has token → `true`
+- No token → `false`
+
+---
+
+### 3️⃣ `user?.token`
+
+```ts
+user?.token;
+```
+
+This means:
+
+> “If user exists, get token. Otherwise return undefined.”
+
+It prevents crash.
+
+Without `?`:
+
+```ts
+user.token; // ❌ crash if user is null
+```
+
+With `?.`:
+
+```ts
+user?.token; // ✅ safe
+```
+
+---
+
+### 4️⃣ `||` (OR Operator)
+
+`||` means: **if left is false, check right**
+
+Example:
+
+```ts
+true  || false → true
+false || true  → true
+false || false → false
+```

@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
+import { useDispatch } from "react-redux";
+import { setLogout } from "../../../store/authSlice";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { user } = useAppSelector((state) => state.auth);
   // console.log(user?.token); //user ko token yasari access garne
   const [isLooggedIn, setIsLoggedIn] = useState<boolean>(false);
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token || !!user?.token);
+    setIsLoggedIn(!!token || !!user?.token); // token="abc" => true if not false || true or false if token exist then Or operator property used
   }, [user?.token]);
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
+    dispatch(setLogout("idle")); // ✅ Clear Redux state
     navigate("/login");
   };
 

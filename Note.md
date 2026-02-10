@@ -343,16 +343,6 @@ This gives:
 ### 2️⃣ What is `!!` ?
 
 `!!` means **convert any value to true/false (boolean)**.
-
-Example:
-
-| Value       | !!Value |
-| ----------- | ------- |
-| `"abc"`     | true    |
-| `""`        | false   |
-| `null`      | false   |
-| `undefined` | false   |
-
 Means:
 
 👉 “Does token exist?”
@@ -361,6 +351,18 @@ Means:
 - No token → `false`
 
 ---
+
+### `||` (OR Operator)
+
+`||` means: **if left is false, check right**
+
+Example:
+
+```ts
+true  || false → true
+false || true  → true
+false || false → false
+```
 
 ### 3️⃣ `user?.token`
 
@@ -387,15 +389,3 @@ user?.token; // ✅ safe
 ```
 
 ---
-
-### 4️⃣ `||` (OR Operator)
-
-`||` means: **if left is false, check right**
-
-Example:
-
-```ts
-true  || false → true
-false || true  → true
-false || false → false
-```

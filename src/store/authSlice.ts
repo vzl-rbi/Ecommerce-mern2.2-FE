@@ -45,11 +45,15 @@ const authSlice = createSlice({
       if (state.user) {
         state.user.token = action.payload
       }
+    },
+    setLogout(state, action:PayloadAction<AuthStatus>){
+      state.user = null,
+      state.status = "idle"
     }
   }
 })
 
-export const {setUser, setStatus, resetStatus, setToken} = authSlice.actions
+export const {setUser, setStatus, resetStatus, setToken, setLogout} = authSlice.actions
 export default authSlice.reducer
 
 /* 

@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import Form from "../Form";
-import type { UserDataType } from "../types";
+import type { UserLoginType } from "../types";
 import { useEffect } from "react";
 import { login, setStatus } from "../../../store/authSlice";
 
 const Login = () => {
   const navigate = useNavigate();
   const { status } = useAppSelector((state) => state.auth);
-  console.log(status);
+  // console.log(status);
   const dispatch = useAppDispatch();
-  const handleLogin = async (data: UserDataType) => {
+  const handleLogin = async (data: UserLoginType) => {
     console.log(data);
     dispatch(login(data));
   };

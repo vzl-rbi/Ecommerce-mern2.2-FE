@@ -40,11 +40,16 @@ const authSlice = createSlice({
     },
     resetStatus(state, action:PayloadAction<AuthStatus>) {
       state.status = action.payload
+    },
+    setToken(state, action:PayloadAction<string>) {
+      if (state.user) {
+        state.user.token = action.payload
+      }
     }
   }
 })
 
-export const {setUser, setStatus, resetStatus} = authSlice.actions
+export const {setUser, setStatus, resetStatus, setToken} = authSlice.actions
 export default authSlice.reducer
 
 /* 
@@ -78,7 +83,10 @@ export function login(data: LoginData) {
     try {
       const res = await API.post('login', data)      
       if(res.status === 200) {
+        const {Token} = res.data//token data ma store gareko login garda create bhako
         dispatch(setStatus("success"))
+        dispatch(setToken(Token))
+        localStorage.setItem("token", Token)
       } else {
         dispatch(setStatus("fail"))
       }      

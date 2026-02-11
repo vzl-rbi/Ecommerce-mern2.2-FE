@@ -389,3 +389,17 @@ user?.token; // ✅ safe
 ```
 
 ---
+
+## Product Slice
+
+export const fetchProducts = () => {
+return async (dispatch : AppDispatch) => {
+dispatch(setStatus("loading"))
+}
+}
+OR alternative
+export function fetchProducts() {
+return async function fetchProductsThunk(dispatch: AppDispatch) {
+dispatch(setStatus("loading))
+}
+}

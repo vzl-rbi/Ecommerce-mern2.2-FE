@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../globals/components/navabr/Navabr";
 import HeroSection from "../../globals/components/hero/HeroSection";
 import FeaturedProducts from "../../globals/components/featured/Featuredproducts";
@@ -11,8 +11,14 @@ import CategoriesSection from "../../globals/components/categories/CategoriesSec
 import PromoBanner from "../../globals/components/promoBanner/PromonoBanner";
 import TestimonialsSection from "../../globals/components/testimonials/TestimonialsSection";
 import Footer from "../../globals/components/footer/Footer";
+import { useAppDispatch } from "../../store/hooks";
+import { fetchProducts } from "../../store/productSlice";
 
 const Home: React.FC = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <Navbar />

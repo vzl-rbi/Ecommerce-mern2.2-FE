@@ -1,3 +1,5 @@
+import type { Status } from "./types";
+
 interface Category {
   id: string;
   categoryName: string
@@ -21,8 +23,7 @@ export interface Product {
   User: User;
   Category: Category;
 }
-export type ProductStatus = "idle" | "loading" | "success" | "fail" | "error";
 export interface ProductState {
-  product: Product[] | null;
-  status: ProductStatus
+  products: Product[] | null;
+  status: Status
 }

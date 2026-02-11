@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction} from "@reduxjs/toolkit";
 import API from "../http";
+import type { Status } from "../globals/components/types/types";
 interface RegisterData {
   username : string;
   email : string;
@@ -9,9 +10,6 @@ interface LoginData {
   email: string;
   password: string;
 }
-// Union Type is cleaner than Enum
-type AuthStatus = "idle" | "loading" | "success" | "fail" | "error";
-
 interface User {
   username: string;
   email: string;
@@ -20,7 +18,7 @@ interface User {
 }
 interface AuthState {
   user: User | null,// Use null to explicitly show "no user"
-  status: AuthStatus, //api call garda success or fail yesbat dekhaune
+  status: Status, //api call garda success or fail yesbat dekhaune
 }
 const initialState: AuthState = {
   user: null,
@@ -35,10 +33,10 @@ const authSlice = createSlice({
     setUser(state, action:PayloadAction<User | null>) {
       state.user = action.payload
     },
-    setStatus(state, action:PayloadAction<AuthStatus>) {
+    setStatus(state, action:PayloadAction<Status>) {
       state.status = action.payload
     },
-    resetStatus(state, action:PayloadAction<AuthStatus>) {
+    resetStatus(state, action:PayloadAction<Status>) {
       state.status = action.payload
     },
     setToken(state, action:PayloadAction<string>) {
@@ -46,7 +44,7 @@ const authSlice = createSlice({
         state.user.token = action.payload
       }
     },
-    setLogout(state, action:PayloadAction<AuthStatus>){
+    setLogout(state, action:PayloadAction<Status>){
       state.user = null,
       state.status = "idle"
     }
@@ -69,7 +67,7 @@ export function register(data: RegisterData) {
   return async function registerThunk(dispatch: any) {
     dispatch(setStatus("loading"))
     try {
-      const response = await API.post('register', data)
+      const response = await API.post('api/register', data)
     if(response.status === 201) {
       dispatch(setStatus("success"))
     } else {
@@ -85,7 +83,7 @@ export function login(data: LoginData) {
   return async function loginThunk(dispatch: any) {
     dispatch(setStatus("loading"))
     try {
-      const res = await API.post('login', data)      
+      const res = await API.post('api/login', data)      
       if(res.status === 200) {
         const {Token} = res.data//token data ma store gareko login garda create bhako
         dispatch(setStatus("success"))

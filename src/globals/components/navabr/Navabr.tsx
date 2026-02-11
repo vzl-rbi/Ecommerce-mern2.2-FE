@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    dispatch(setLogout("idle")); // ✅ Clear Redux state
+    dispatch(setLogout("idle")); // Clear token from Redux state
     navigate("/login");
   };
 

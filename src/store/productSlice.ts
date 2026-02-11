@@ -5,14 +5,14 @@ import type { AppDispatch } from "./store";
 import API from "../http";
 
 const initialState: ProductState = {
-  products: null,
+  products: [],
   status: "idle"
 }
 const productSlice = createSlice({
-  name: "product",
+  name: "products",
   initialState,
   reducers: {
-    setProducts(state, action: PayloadAction<Product[] | null>) {
+    setProducts(state, action: PayloadAction<Product[]>) {
       state.products = action.payload
     },
     setStatus(state, action: PayloadAction<Status>) {

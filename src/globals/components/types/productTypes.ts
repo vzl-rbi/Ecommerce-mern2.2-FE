@@ -24,6 +24,6 @@ export interface Product {
   Category: Category;
 }
 export interface ProductState {
-  products: Product[] | null;
+  products: Product[];
   status: Status
 }

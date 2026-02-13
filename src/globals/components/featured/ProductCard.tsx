@@ -6,15 +6,6 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  // const {
-  //   productName,
-  //   productDescription,
-  //   productPrice,
-  //   productTotalStockQty,
-  //   image,
-  //   User,
-  // } = product;
-
   return (
     <Link to={`/product/${product.id}`}>
       <div className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition hover:scale-105">
@@ -28,9 +19,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="p-5">
           {/* Name */}
           <h3 className="text-xl font-semibold mb-1">{product.productName}</h3>
-
-          {/* Seller */}
-          {/* <p className="text-sm text-gray-400 mb-2">Sold by {User?.userName}</p> */}
 
           {/* Description */}
           <p className="text-gray-300 text-sm mb-3 line-clamp-2">

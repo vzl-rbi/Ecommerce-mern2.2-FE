@@ -1,0 +1,11 @@
+import type { Product } from "./productTypes";
+import type { Status } from "./types";
+interface CartItem {
+  product: Product;
+  quantity : number
+}
+
+export interface CartState {
+  items : CartItem[];
+  status: Status
+}

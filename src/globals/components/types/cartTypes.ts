@@ -1,6 +1,6 @@
 import type { Product } from "./productTypes";
 import type { Status } from "./types";
-interface CartItem {
+export interface CartItem {
   product: Product;
   quantity : number
 }

@@ -406,4 +406,4 @@ dispatch(setStatus("loading))
 
 ## NOte
 
-` Dherai Api Hit nagarne sakdo kam hit hanne user experince and webist eramro work garxa bin alag`
+` Dherai Api Hit nagarne sakdo kam hit hanne user experince and webist ramro work garxa bina lag`

@@ -44,7 +44,7 @@ const authSlice = createSlice({
         state.user.token = action.payload
       }
     },
-    setLogout(state, action:PayloadAction<Status>){
+    setLogout(state){
       state.user = null,
       state.status = "idle"
     }

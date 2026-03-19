@@ -93,7 +93,7 @@ const Navbar: React.FC = () => {
                 Login
               </Link>
               <Link
-                to="/signup"
+                to="/register"
                 className="px-4 py-2 bg-amber-500 text-black rounded-lg hover:bg-amber-400 transition"
               >
                 Sign Up

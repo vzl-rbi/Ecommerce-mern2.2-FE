@@ -2,20 +2,30 @@ import type React from "react";
 import Navbar from "../../globals/components/navabr/Navabr";
 import { Link, useParams } from "react-router-dom";
 import Footer from "../../globals/components/footer/Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchByProductId } from "../../store/productSlice";
+import { addToCart } from "../../store/cartSlice";
 const SingleProduct: React.FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   // console.log(id);
-  const { status, singleProduct } = useAppSelector((state) => state.products);
+  const { singleProduct } = useAppSelector((state) => state.products);
+  // ✅ Fix 1 & 2: Local quantity state
+  const [quantity, setQuantity] = useState(1);
   useEffect(() => {
+    if (id) dispatch(fetchByProductId(id));
+  }, [id, dispatch]);
+  const handleAddToCart = () => {
+    // console.log("Clicked", id);
+
     if (id) {
-      dispatch(fetchByProductId(id));
+      dispatch(addToCart(id, quantity));
     }
-  }, []);
-  console.log(singleProduct);
+  };
+  // console.log(handleAddToCart);
+  const isOutOfStock = singleProduct?.productTotalStockQty === 0;
+  const maxStock = singleProduct?.productTotalStockQty ?? 1;
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <Navbar />
@@ -47,7 +57,7 @@ const SingleProduct: React.FC = () => {
             {/* Price & Stock */}
             <div className="flex items-center gap-6 text-2xl">
               <span className="font-bold text-amber-400">
-                Rs. {singleProduct?.productPrice.toLocaleString()}
+                Rs. {singleProduct?.productPrice?.toLocaleString()}
               </span>
               <span className="text-gray-400">
                 Stock: {singleProduct?.productTotalStockQty}
@@ -63,13 +73,19 @@ const SingleProduct: React.FC = () => {
             <div className="flex items-center gap-6 mt-4">
               <span className="text-lg font-medium">Quantity:</span>
               <div className="flex items-center border border-gray-700 rounded-lg">
-                <button className="px-5 py-3 hover:bg-gray-800 transition">
+                <button
+                  className="px-5 py-3 hover:bg-gray-800 transition"
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                >
                   -
                 </button>
                 <span className="px-8 py-3 text-lg font-medium">
                   {singleProduct?.productTotalStockQty}
                 </span>
-                <button className="px-5 py-3 hover:bg-gray-800 transition">
+                <button
+                  className="px-5 py-3 hover:bg-gray-800 transition"
+                  onClick={() => setQuantity((q) => Math.min(maxStock, q + 1))}
+                >
                   +
                 </button>
               </div>
@@ -77,8 +93,9 @@ const SingleProduct: React.FC = () => {
 
             {/* Add to Cart Button */}
             <button
-              disabled={singleProduct?.productTotalStockQty === 0}
+              disabled={isOutOfStock}
               className="mt-6 bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-700 disabled:cursor-not-allowed py-4 rounded-lg font-bold text-xl transition transform hover:scale-105 active:scale-95"
+              onClick={handleAddToCart}
             >
               {singleProduct?.productTotalStockQty === 0
                 ? "Out of Stock"

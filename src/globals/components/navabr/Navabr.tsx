@@ -8,6 +8,7 @@ const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useAppSelector((state) => state.auth);
+  const { items } = useAppSelector((state) => state.carts);
   // console.log(user?.token); //user ko token yasari access garne
   const [isLooggedIn, setIsLoggedIn] = useState<boolean>(false);
   useEffect(() => {
@@ -78,6 +79,7 @@ const Navbar: React.FC = () => {
               <span className="absolute -top-2 -right-2 bg-red-600 text-xs w-5 h-5 rounded-full flex items-center justify-center">
                 2
               </span>
+              ({items.length})
             </Link>
           </li>
         </ul>

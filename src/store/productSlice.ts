@@ -31,7 +31,7 @@ export const fetchProducts = () => {
   return async (dispatch : AppDispatch) => {
     dispatch(setStatus("loading"))
     try {
-      const res = await API.get('admin/product')
+      const res = await API.get(`admin/product`)
       if(res.status === 200) {
         const { data} = res.data  // data: [{}, {}, {}] ==> postman tira herda ni bhayo 
         dispatch(setProducts(data))
@@ -59,7 +59,7 @@ export const fetchByProductId = (productId: string) => {
       const res = await API.get(`admin/product/${productId}`)
       if(res.status === 200) {
         const { data} = res.data 
-        dispatch(setProducts(data))
+        dispatch(setSingleProduct(data))
         dispatch(setStatus("success"))
       } else {
         dispatch(setStatus("fail"))

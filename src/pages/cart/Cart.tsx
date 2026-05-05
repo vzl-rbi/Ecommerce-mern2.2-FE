@@ -1,13 +1,14 @@
 // src/pages/cart/Cart.tsx
 import type React from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../globals/components/navabr/Navabr";
 import Footer from "../../globals/components/footer/Footer";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchCart } from "../../store/cartSlice";
 
 const Cart: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { items, status } = useAppSelector((state) => state.carts);
 
@@ -102,7 +103,10 @@ const Cart: React.FC = () => {
                   Rs. {total.toLocaleString()}
                 </span>
               </div>
-              <button className="mt-4 bg-indigo-600 hover:bg-indigo-500 py-4 rounded-lg font-bold text-lg transition transform hover:scale-105 active:scale-95">
+              <button
+                onClick={() => navigate("/checkout")}
+                className="mt-4 bg-indigo-600 hover:bg-indigo-500 py-4 rounded-lg font-bold text-lg transition transform hover:scale-105 active:scale-95"
+              >
                 Proceed to Checkout
               </button>
             </div>

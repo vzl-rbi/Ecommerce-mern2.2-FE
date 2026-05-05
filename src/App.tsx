@@ -6,6 +6,7 @@ import Register from "./pages/auth/register/Register";
 import Login from "./pages/auth/login/Login";
 import SingleProduct from "./pages/singleProduct/SingleProduct";
 import Cart from "./pages/cart/Cart";
+import CheckoutPage from "./pages/checkout/Checkout";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/Login" element={<Login />} />
             <Route path="/product/:id" element={<SingleProduct />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
         </BrowserRouter>
       </Provider>

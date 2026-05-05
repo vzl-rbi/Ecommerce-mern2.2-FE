@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import Navbar from "../../globals/components/navabr/Navabr";
+import { useAppSelector } from "../../store/hooks";
 
 type PaymentMethod = "COD" | "khalti";
 
@@ -80,6 +81,9 @@ const CheckoutPage = () => {
     });
   };
 
+  const { items } = useAppSelector((state) => state.carts);
+  // console.log(items);
+
   return (
     <>
       <Navbar />
@@ -99,30 +103,31 @@ const CheckoutPage = () => {
             </p>
 
             <div className="mt-6 space-y-3 rounded-lg border bg-white px-3 py-4 sm:px-6">
-              {demoItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex flex-col rounded-lg bg-white sm:flex-row"
-                >
-                  <img
-                    className="m-2 h-24 w-28 rounded-md border object-cover object-center"
-                    src={item.image}
-                    alt={item.name}
-                  />
+              {items.length > 0 &&
+                items.map((item) => (
+                  <div
+                    key={item?.Product?.id}
+                    className="flex flex-col rounded-lg bg-white sm:flex-row"
+                  >
+                    <img
+                      className="m-2 h-24 w-28 rounded-md border object-cover object-center"
+                      src={item?.Product?.image}
+                      alt={item?.Product?.productName}
+                    />
 
-                  <div className="flex w-full flex-col px-4 py-4">
-                    <span className="font-semibold text-gray-900">
-                      {item.name}
-                    </span>
-                    <span className="mt-1 text-sm text-gray-400">
-                      Qty: {item.quantity}
-                    </span>
-                    <p className="mt-1 text-lg font-bold text-gray-900">
-                      Rs. {item.price}
-                    </p>
+                    <div className="flex w-full flex-col px-4 py-4">
+                      <span className="font-semibold text-gray-900">
+                        {item?.Product?.productName}
+                      </span>
+                      <span className="mt-1 text-sm text-gray-400">
+                        Qty: {item?.Product?.productTotalStockQty}
+                      </span>
+                      <p className="mt-1 text-lg font-bold text-gray-900">
+                        Rs. {item?.Product?.productPrice}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
 
             <p className="mt-8 text-lg font-medium text-gray-900">
